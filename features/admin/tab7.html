@@ -1,0 +1,36 @@
+<div class="page-header">
+  <h1>Build Your Scouting Forms</h1>
+</div>
+<div class="col-md-9">
+<h3>Pit Scout Form</h3>
+<hr>
+<div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Builder</h3>
+                </div>
+                <div fb-builder="default"></div>
+                <div class="panel-footer">
+                    <div class="checkbox">
+                        <label><input type="checkbox" ng-model="isShowScope" />
+                            Show scope
+                        </label>
+                    </div>
+                    <button class="btn" ng-click="reset()">Reset</button>
+                    <pre ng-if="isShowScope">{{form}}</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div fb-components></div>
+        </div>
+    </div>
+</div>
+<div class="col-md-3">
+  <ul class="nav nav-pills nav-stacked">
+    <li ui-sref-active="active"><a ui-sref="admin.custom({tab: 'tab6'})" ng-click="clearScope()">Match Form</a></li>
+    <li ui-sref-active="active"><a ui-sref="admin.custom({tab: 'tab7'})">Pit Form</a></li>
+  </ul>
+</div>
+

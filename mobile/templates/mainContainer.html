@@ -1,0 +1,29 @@
+<ion-side-menus>
+
+       <ion-pane ion-side-menu-content>
+           <ion-nav-bar type="bar-royal"
+                        back-button-type="button-icon"
+                        back-button-icon="ion-ios7-arrow-back"
+                        animation="nav-title-slide-ios7"
+               >
+
+            </ion-nav-bar>
+           <ion-nav-view name="main"></ion-nav-view>
+       </ion-pane>
+
+       <ion-side-menu side="left">
+           <header class="bar bar-header bar-dark">
+               <div class="title">Menu</div>
+           </header>
+           <ion-content has-header="true" overflow-scroll="true">
+               <ul class="list">
+                   <a ui-sref="main.home" class="item" ng-click="toggleMenu()">Home</a>
+                   <a ui-sref="main.teams" class="item" ng-click="toggleMenu()">Teams</a>
+                   <a ui-sref="main.matches" class="item" ng-click="toggleMenu()">Matches</a>
+                   <a ui-sref="main.data" class="item" ng-click="toggleMenu()">Data</a>
+                   <a ui-sref="intro" class="item" ng-click="toggleMenu()">Introduction</a>
+               </ul>
+           </ion-content>
+       </ion-side-menu>
+
+   </ion-side-menus>

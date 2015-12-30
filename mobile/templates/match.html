@@ -1,0 +1,97 @@
+<ion-view title="Match Scout" left-buttons="leftButtons" right-buttons="rightButtons">
+  <ion-nav-bar class="nav-title" type="bar-royal"></ion-nav-bar>
+
+  <ion-content class="padding" has-header="true" padding="true">
+    <form name="matchScout">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Match Number</span>
+        <input ng-model="newMatch.matchNumber" type="tel">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Team Number</span>
+        <input ng-model="newMatch.teamNumber" type="tel">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Alliance Final Score</span>
+        <input ng-model="newMatch.score" type="tel">
+      </label>
+      <ion-toggle ng-model="newMatch.dead" toggle-class="toggle-assertive"><p class="input-">Dead Robot?</p></ion-toggle>
+    </div>
+    <div class="list">
+      <div class="item item-divider">
+        Autonomous
+      </div>
+      <label class="item item-input">
+        <span class="input-label">Reliability Rating</span>
+        <div class="item range range-positive">
+          <input type="range" class="range-slider" name="autoReliability" min="0" max="5" value="0" ng-model="newMatch.autoReliability" ng-disabled="newMatch.dead">
+        </div>
+        <p class="input-label" align="right">{{newMatch.autoReliability}}</p>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Scoring Potential</span>
+        <div class="item range range-positive">
+          <input type="range" class="range-slider" name="autoPotential" min="0" max="5" value="0" ng-model="newMatch.autoPotential" ng-disabled="newMatch.dead">
+        </div>
+        <p class="input-label" align="right">{{newMatch.autoPotential}}</p>
+      </label>
+
+    </div>
+    <div class="list">
+      <div class="item item-divider">
+      Teleop
+      </div>
+      <label class="item item-input">
+        <span class="input-label">Reliability Rating</span>
+        <div class="item range range-positive">
+          <input type="range" class="range-slider" name="teleopReliability" min="0" max="5" value="0" ng-model="newMatch.teleopReliability" ng-disabled="newMatch.dead">
+        </div>
+        <p class="input-label" align="right">{{newMatch.teleopReliability}}</p>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Scoring Potential</span>
+        <div class="item range range-positive">
+          <input type="range" class="range-slider" name="teleopPotential" min="0" max="5" value="0" ng-model="newMatch.teleopPotential" ng-disabled="newMatch.dead">
+        </div>
+        <p class="input-label" align="right">{{newMatch.teleopPotential}}</p>
+      </label>
+
+    </div>
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Speed</span>
+        <div class="item range range-positive">
+          <input type="range" class="range-slider" name="speed" min="0" max="5" value="0" ng-model="newMatch.speedRating" ng-disabled="newMatch.dead">
+        </div>
+        <p class="input-label" align="right">{{newMatch.speedRating}}</p>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Handling Reliability</span>
+        <div class="item range range-positive">
+          <input type="range" class="range-slider" name="handling" min="0" max="5" value="0" ng-model="newMatch.handlingRating" ng-disabled="newMatch.dead">
+        </div>
+        <p class="input-label" align="right">{{newMatch.handlingRating}}</p>
+      </label>
+       <label class="item item-input">
+        <span class="input-label">Crate Pickup Rating</span>
+        <div class="item range range-positive">
+          <input type="range" class="range-slider" name="crate" min="0" max="5" value="0" ng-model="newMatch.crateRating" ng-disabled="newMatch.dead">
+        </div>
+        <p class="input-label" align="right">{{newMatch.crateRating}}</p>
+      </label>
+       <label class="item item-input">
+        <span class="input-label">Container Pickup Rating</span>
+        <div class="item range range-positive">
+          <input type="range" class="range-slider" name="container" min="0" max="5" value="0" ng-model="newMatch.containerRating" ng-disabled="newMatch.dead">
+        </div>
+        <p class="input-label" align="right">{{newMatch.containerRating}}</p>
+      </label>
+      <ion-toggle ng-model="newMatch.good" toggle-class="toggle-calm"><p class="input-">"Good" Robot?</p></ion-toggle>
+      <hr>
+      <textarea placeholder="Comments" ng-model="newMatch.comments" ng-disabled="newMatch.dead"></textarea>
+    </div>
+    <button class="button button-full button-balanced" ng-click="add()">Submit</button>
+  </form>
+  </ion-content>
+</ion-view>

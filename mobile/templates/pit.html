@@ -1,0 +1,71 @@
+<ion-view title="Pit Scout" left-buttons="leftButtons" right-buttons="rightButtons">
+  <ion-nav-bar class="nav-title" type="bar-royal"></ion-nav-bar>
+
+  <ion-content class="padding" has-header="true" padding="true">
+    <form name="pitScout">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Team Number</span>
+        <input ng-model="newTeam.teamNumber" type="number">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Team Name</span>
+        <input ng-model="newTeam.teamName" type="text">
+      </label>
+    </div>
+    <div class="list">
+      <div class="item item-divider">
+        Abilities:
+      </div>
+        <ion-checkbox ng-model="newTeam.vision">Vision?</ion-checkbox>
+        <ion-checkbox ng-model="newTeam.liftCrates">Lift Crates?</ion-checkbox>
+        <label class="item item-input">
+          <span class="input-label">How Many?</span>
+          <input ng-model="newTeam.crateLiftnum" type="tel">
+        </label>
+        <ion-checkbox ng-model="newTeam.stackCrates">Stack Crates?</ion-checkbox>
+        <label class="item item-input">
+          <span class="input-label">How Many?</span>
+          <input ng-model="newTeam.crateStacknum" type="tel">
+        </label>
+        <ion-checkbox ng-model="newTeam.liftContainers">Lift Containers?</ion-checkbox>
+        <ion-checkbox ng-model="newTeam.stackContainers">Stack Container?</ion-checkbox>
+        <ion-checkbox ng-model="newTeam.noodleScore">Score a Noodle?</ion-checkbox>
+    </div>
+    <div class="list">
+      <div class="item item-divider">
+      Position Preference:
+      </div>
+
+    </div>
+    <div class="list">
+      <div class="item item-divider">
+      Driving:
+      </div>
+      <ion-toggle ng-model="newTeam.mechanum" toggle-class="toggle-assertive"><p class="input-">Can you Drive side to Side?</p></ion-toggle>
+      <div class="item item-input item-select">
+        <div class="input-label">
+          Driving System
+        </div>
+        <select ng-model="newTeam.driveSystem">
+          <option value="arcade" selected>Arcade</option>
+          <option value="tank" >Tank</option>
+          <option value="newTeam.driveSystem" >Other</option>
+        </select>
+      </div>
+      <label class="item item-input">
+        <span class="input-label">If other, please explain:</span>
+        <input ng-model="newTeam.driveSystem" type="text">
+      </label>
+    </div>
+    <div class="list">
+      <div class="item item-divider">
+      Practice Preoblems:
+      </div>
+        <ion-checkbox ng-model="newTeam.practiceProblems">Yes/No</ion-checkbox>
+        <textarea ng-model="newTeam.practiceProblemsdesc" placeholder="If yes, please describe"></textarea>
+    </div>
+    <button class="button button-full button-balanced" ng-click="add()">Submit</button>
+  </form>
+  </ion-content>
+</ion-view>

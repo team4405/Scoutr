@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" ng-app="scoutr" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="scoutr" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="scoutr" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="scoutr"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link rel="icon" href="assets/img/favicon.ico">
+    <title>FRC Scoutr - by Team 4405</title>
+	<!-- inject:css -->
+    <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css">
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="js/components/formbuilder/angular-form-builder.css">
+    <link rel="stylesheet" href="js/components/formbuilder/site.css" />
+    <!-- endinject -->
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<!-- Fixed navbar-->
+	<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" rel="home" href="#" title="Brand">
+            Scoutr<!--<img style="max-width:100px; margin-top: -7px;" src="./images/AngularJS-small.png">-->
+        </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-controller="MainCtrl">
+        <ul class="nav navbar-nav">
+            <li ui-sref-active="active"><a ui-sref="dashboard">Dashboard</a></li>
+            <li ui-sref-active="active"><a ui-sref="about">About</a></li>
+            <li ui-sref-active="active"><a ui-sref="schedule">Schedule</a></li>
+            <li ui-sref-active="active"><a ui-sref="admin.tab1">Admin</a></li>
+            <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Data <span
+                class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a ui-sref="data.matches">All Matches</a></li>
+                <li><a ui-sref="data.teams">All Teams</a></li>
+                <li><a ui-sref="data.next-match">Next Match</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Pit Scoutr</li>
+                <li><a ui-sref="pit.teams">All Teams</a></li>
+                <li><a ui-sref="pit.compare">Compare Teams</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Match Scoutr</li>
+                <li><a ui-sref="match.all">All Matches</a></li>
+                <li><a ui-sref="match.teams">All Teams</a></li>
+                <li><a ui-sref="match.hypothetical">Hypothetical Match</a></li>
+            </ul>
+            </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Pit</a></li>
+            <li><a href="#">Match</a></li>
+            <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account <span
+                class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu" id="user-menu">
+                <li><a ng-hide="loggedIn()" data-toggle="modal" data-target="#login">Login</a></li>
+                <li><a ng-hide="loggedIn()" data-toggle="modal" data-target="#register">Register</a></li>
+                <li ng-show="loggedIn()" class="divider"></li>
+                <li><a ng-show="loggedIn()" ng-click='logout()'>Log Out</a></li> 
+            </ul>
+            </li>
+        </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+
+        <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser.
+            Please <a href="http://browsehappy.com/">upgrade
+            your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div ui-view>
+           <angularjs-notify></angularjs-notify>
+            
+        </div>
+    </div>
+	
+	<footer class="footer">
+		<div class="container">
+			<p class="text-muted">Copyright &copy 2015 FRC Team 4405 The Atoms Family</p>
+		</div>
+	</footer>
+    <!-- inject:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-loader/angular-loader.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="js/components/angular-bootstrap/angular-bootstrap-0.14.3.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="bower_components/less/dist/less.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/parse-angular-patch/dist/parse-angular.js"></script>
+    <script src="bower_components/angularjs-notify/dist/angularjs-notify.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/components/formbuilder/validator.min.js"></script>
+    <script src="js/components/formbuilder/validator-rules.min.js"></script>
+    <script src="js/components/formbuilder/angular-form-builder.js"></script>
+    <script src="js/components/formbuilder/angular-form-builder-components.js"></script>
+    <!--<script src="js/components/bootstrap-confirm/bootstrap-confim.js"></script>-->
+    <!--jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/components/bootstrap-confirm/bootbox.min.js"></script>
+    <!-- PARSE -->
+    <script type="text/javascript" src="https://www.parsecdn.com/js/parse-1.3.5.min.js"></script>
+    <script src="features/users/users.js"></script>
+    <script src="features/dashboard/dashboard.js"></script>
+    <script src="features/about/about.js"></script>
+    <script src="features/admin/admin.js"></script>
+    <script>
+
+		Parse.initialize("E9CzXT1NS4T1luWwNu3jRKSHjmUIdPk0ca321pej", "TswapPftwupky3FF9fbPjB9WjBYyW5s07fQ3qFkz");
+        var currentUser = Parse.User.current();
+        //var name = currentUser.get("username");
+        var hi = "hello";
+        // if (currentUser) {
+        //     document.getElementById('user-menu').innerHTML = "<li><a onclick='logout()'>Logout</a></li>"
+        // } else {
+        //     document.getElementById('user-menu').innerHTML = "<li><a data-toggle='modal' data-target='#login'>Login</a></li><li><a data-toggle='modal' data-target='#register'>Register</a></li>"
+        // }
+        
+        function logout() {
+            Parse.User.logOut();
+        }
+        
+        function login() {
+            
+            // retieve the form values
+            var password = $('input[name=password]').val();
+            var email = $('input[name=email]').val();
+            //var team = $('input[name=team]').val();
+
+            // create a new user object client side using the values retieved from the form
+            var user = new Parse.User();
+            user.set("username", email);
+            user.set("password", password);
+    
+            Parse.User.logIn(email, password, {
+                success: function(user) {
+                    //successful login
+                    console.log("Successful sign-up and login!")
+                    location.href = "http://localhost:8100/#/dashboard";
+                },
+                error: function(user, error) {
+                    //error
+                    console.log("Error: " + error.code + " " + error.message);
+                }
+            });
+        }
+                
+        function register() {
+
+            // retieve the form values
+            var password = $('input[name=password]').val();
+            var username = $('input[name=email]').val();
+            //var team = $('input[name=team]').val();
+
+            // create a new user object client side using the values retieved from the form
+            var user = new Parse.User();
+            user.set("username", username);
+            user.set("password", password);
+    
+            // Create a custom field for the user (there is no limit to the number of custom records)
+            //user.set("team", team);
+    
+            // save the user to the cloud storage
+            user.signUp(null, {
+                success: function(user) {
+                    // return the success response
+                    Parse.User.logIn(username, password, {
+                        success: function(user) {
+                            // Do stuff after successful login.
+                            console.log("Successful sign-up and login!");
+                        },
+                        error: function(user, error) {
+                            // The login failed. Check error to see why.
+                            console.log("Error: " + error.code + " " + error.message);
+                            location.href = "#";
+                        }
+                        })
+                },
+                error: function(user, error) {
+                    // return the error response
+                    console.log("Error: " + error.code + " " + error.message);
+                }
+            });
+            
+        }
+	</script>
+    <!-- endinject -->
+      <!-- Modal -->
+  <div ng-controller="MainCtrl">
+  <div class="modal fade" id="register" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Sign Up on Scoutr</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="well">
+                            <form id="loginForm" method="POST" action="#" novalidate="novalidate">
+                                <div class="form-group">
+                                    <label for="name" class="control-label">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="" required="" ng-model="register.name">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="control-label">Team</label>
+                                    <select id="select">
+                                        <option value="">Select your team...</option>
+                                    </select>
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="control-label">Username</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="" required="" ng-model="register.username">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="username" class="control-label">Email</label>
+                                    <input type="text" class="form-control" id="username" name="username" value="" required="" ng-model="register.email">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="control-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" value="" required="" ng-model="register.password">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="control-label">Password Again</label>
+                                    <input type="password" class="form-control" id="password2" name="password2" value="" required="" title="Please enter your password again">
+                                    <span class="help-block"></span>
+                                </div>
+                                <button type="button" class="btn btn-success btn-block" ng-click="register()">Sign Up</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <p class="lead">Sign Up now for <span class="text-success">Scoutr</span></p>
+                        <ul class="list-unstyled" style="line-height: 2">
+                            <li><span class="fa fa-check text-success"></span> Scout all teams and matches at any FRC Event</li>
+                            <li><span class="fa fa-check text-success"></span> Connected to TheBlueAlliance for more data <small>(coming soon)</small></li>
+                            <li><span class="fa fa-check text-success"></span> Custom Scouting Metrics</li>
+                            <li><span class="fa fa-check text-success"></span> And much more!</li>
+                            <li><a href="/read-more/"><u>Read more</u></a></li>
+                        </ul>
+                        <p>If your Scouting Captain has already set your team up, you can sign up here. If you team does not show up on the list, then you need to register your team account.</p>
+                        <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, Register my team account!</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                Already have an account?
+                <a data-dismiss="modal" data-toggle="modal" data-target="#login">Login</a>
+            </div>
+        </div>
+        
+        </div>
+        </div>
+    <!-- Modal -->
+  <div class="modal fade" id="login" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">x</button>
+            <h3>Login to Scoutr</h3>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="" name="login_form" class="pull-center">
+              <p><input type="text" class="span3" name="email" ng-model="login.username" id="email"></p>
+              <p><input type="password" class="span3" ng-model="login.password" name="passwd"></p>
+              <p><button type="button" class="btn btn-primary" ng-click="login()" data-dismiss="modal">Sign in</button>
+                <a href="#">Forgot Password?</a>
+              </p>
+            </form>
+          </div>
+          <div class="modal-footer">
+            New To Scoutr?
+            <a data-dismiss="modal" data-toggle="modal" data-target="#register">Register</a>
+          </div>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+  
+</body>
+
+</html>

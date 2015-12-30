@@ -1,0 +1,94 @@
+<!--<div ng-repeat="team in teams">-->
+  <div class="card">
+    <div class="item item-divider">
+      Next Match is at XX:XX{{nextMatchTime}}
+    </div>
+    <div class="list card">
+
+      <div class="item item-avatar">
+        <h2>Team {{teamNumber}}</h2>
+        <p>Team Name (the picture would be of the robot)</p>
+      </div>
+
+      <div class="item item-body">
+        <ion-list>
+
+          <div class="item item-divider">
+            Autonomous
+          </div>
+          <ion-item class="item">
+            <i class="icon"></i>
+            Average Score
+            <span class="badge badge-balanced">
+              50
+            </span>
+          </ion-item>
+          <ion-item class="item">
+            Some other data point
+            <span class="badge badge-balanced">Value</span>
+          </ion-item>
+
+          <div class="item item-divider">
+            Teleop
+          </div>
+          <ion-item class="item">
+            <i class="icon"></i>
+            Average Score
+            <span class="badge badge-balanced">
+              20
+            </span>
+          </ion-item>
+          <ion-item class="item">
+            Some other data point
+            <span class="badge badge-balanced">Value</span>
+          </ion-item>
+        </ion-list>
+      </div>
+
+    </div>
+  </div>
+<!--</div>-->
+
+
+
+<ion-tab title="Pit Scout" icon-on="ion-ios7-filing" icon-off="ion-ios7-filing-outline">
+    <ion-content has-header="true" padding="true" overflow-scroll="true">
+      <h2>Scout a Match</h2>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">First Name</span>
+          <input ng-model="newUser.firstName" type="text">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Last Name</span>
+          <input ng-model="newUser.lastName" type="text">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input ng-model="newUser.email" type="text">
+        </label>
+        <button class="button button-full button-royal" ng-click="closeModal(2)">Create</button>
+      </div>
+    </ion-content>
+</ion-tab>
+
+<ion-tab title="Pit Scout" icon-on="ion-ios7-filing" icon-off="ion-ios7-filing-outline">
+    <ion-content has-header="true" padding="true" overflow-scroll="true">
+      <h2>Pit Scout a Team</h2>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">First Name</span>
+          <input ng-model="newUser.firstName" type="text">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Last Name</span>
+          <input ng-model="newUser.lastName" type="text">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input ng-model="newUser.email" type="text">
+        </label>
+        <button class="button button-full button-royal" ng-click="closeModal(2)">Create</button>
+      </div>
+    </ion-content>
+</ion-tab>

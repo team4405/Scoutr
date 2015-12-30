@@ -1,0 +1,177 @@
+      <!-- Modal -->
+  <div class="modal fade" id="register" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+<div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">Login to site.com</h4>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-xs-6">
+                      <div class="well">
+                          <form id="loginForm" method="POST" action="#" novalidate="novalidate">
+                              <div class="form-group">
+                                  <label for="name" class="control-label">Name</label>
+                                  <input type="text" class="form-control" id="name" name="name" value="" required="" title="Please enter your name">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                  <label for="name" class="control-label">Team</label>
+                                  <select>
+                                    <option value="volvo">Volvo</option>
+                                    <option value="saab">Saab</option>
+                                    <option value="opel">Opel</option>
+                                    <option value="audi">Audi</option>
+                                  </select>
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                  <label for="username" class="control-label">Email</label>
+                                  <input type="text" class="form-control" id="username" name="username" value="" required="" title="Please enter your username">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                  <label for="password" class="control-label">Password</label>
+                                  <input type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                  <label for="password" class="control-label">Password Again</label>
+                                  <input type="password" class="form-control" id="password2" name="password2" value="" required="" title="Please enter your password again">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+                              <div class="checkbox">
+                                  <label>
+                                      <input type="checkbox" name="remember" id="remember"> Remember login
+                                  </label>
+                                  <p class="help-block">(if this is a private computer)</p>
+                              </div>
+                              <button type="button" class="btn btn-success btn-block" onclick="register()">Login</button>
+                              <a href="/forgot/" class="btn btn-default btn-block">Help to login</a>
+                          </form>
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <p class="lead">Register now for <span class="text-success">FREE</span></p>
+                      <ul class="list-unstyled" style="line-height: 2">
+                          <li><span class="fa fa-check text-success"></span> See all your orders</li>
+                          <li><span class="fa fa-check text-success"></span> Fast re-order</li>
+                          <li><span class="fa fa-check text-success"></span> Save your favorites</li>
+                          <li><span class="fa fa-check text-success"></span> Fast checkout</li>
+                          <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
+                          <li><a href="/read-more/"><u>Read more</u></a></li>
+                      </ul>
+                      <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            Already have an account?
+            <a data-dismiss="modal" data-toggle="modal" data-target="#login">Login</a>
+          </div>
+      </div>
+      
+    </div>
+  </div>
+    <!-- Modal -->
+  <div class="modal fade" id="login" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">x</button>
+            <h3>Login to Scoutr</h3>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="" name="login_form">
+              <p><input type="text" class="span3" name="email" id="email"></p>
+              <p><input type="password" class="span3" name="passwd"></p>
+              <p><button type="button" class="btn btn-primary" onclick="login()">Sign in</button>
+                <a href="#">Forgot Password?</a>
+              </p>
+            </form>
+          </div>
+          <div class="modal-footer">
+            New To Scoutr?
+            <a data-dismiss="modal" data-toggle="modal" data-target="#register">Register</a>
+          </div>
+      </div>
+      
+    </div>
+  </div>
+ <script>
+ function logout() {
+            Parse.User.logOut();
+        }
+        
+        function login(e) {
+            
+            e.preventDefault();
+            // retieve the form values
+            var password = $('input[name=password]').val();
+            var email = $('input[name=email]').val();
+            //var team = $('input[name=team]').val();
+
+            // create a new user object client side using the values retieved from the form
+            var user = new Parse.User();
+            user.set("username", email);
+            user.set("password", password);
+    
+            Parse.User.logIn(email, password, {
+                success: function(user) {
+                    //successful login
+                    console.log("Successful sign-up and login!")
+                    location.href = "http://localhost:8100/#/dashboard";
+                },
+                error: function(user, error) {
+                    //error
+                    console.log("Error: " + error.code + " " + error.message);
+                }
+            });
+        }
+                
+        function register(e) {
+            
+            e.preventDefault();
+            // retieve the form values
+            var password = $('input[name=password]').val();
+            var username = $('input[name=email]').val();
+            //var team = $('input[name=team]').val();
+
+            // create a new user object client side using the values retieved from the form
+            var user = new Parse.User();
+            user.set("username", username);
+            user.set("password", password);
+    
+            // Create a custom field for the user (there is no limit to the number of custom records)
+            //user.set("team", team);
+    
+            // save the user to the cloud storage
+            user.signUp(null, {
+                success: function(user) {
+                    // return the success response
+                    Parse.User.logIn(username, password, {
+                        success: function(user) {
+                            // Do stuff after successful login.
+                            console.log("Successful sign-up and login!");
+                        },
+                        error: function(user, error) {
+                            // The login failed. Check error to see why.
+                            console.log("Error: " + error.code + " " + error.message);
+                            location.href = "#";
+                        }
+                        })
+                },
+                error: function(user, error) {
+                    // return the error response
+                    console.log("Error: " + error.code + " " + error.message);
+                }
+            });
+            
+        }
+</script>        

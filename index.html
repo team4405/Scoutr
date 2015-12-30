@@ -173,6 +173,8 @@
                 }
             });
         }
+        
+
                 
         function register() {
 
@@ -232,7 +234,7 @@
                             <form id="loginForm" method="POST" action="#" novalidate="novalidate">
                                 <div class="form-group">
                                     <label for="name" class="control-label">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" value="" required="" ng-model="register.name">
+                                    <input type="text" class="form-control" id="name" name="name" value="" required="" ng-model="register.fname">
                                     <span class="help-block"></span>
                                 </div>
                                 <div class="form-group">
@@ -255,11 +257,6 @@
                                 <div class="form-group">
                                     <label for="password" class="control-label">Password</label>
                                     <input type="password" class="form-control" id="password" name="password" value="" required="" ng-model="register.password">
-                                    <span class="help-block"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="control-label">Password Again</label>
-                                    <input type="password" class="form-control" id="password2" name="password2" value="" required="" title="Please enter your password again">
                                     <span class="help-block"></span>
                                 </div>
                                 <button type="button" class="btn btn-success btn-block" ng-click="register()">Sign Up</button>

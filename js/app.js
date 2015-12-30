@@ -130,16 +130,16 @@ var scoutr = angular.module('scoutr'
         });
     }
     
-    $scope.signup = function() {   
+    $scope.register = function() {   
         
-        var name = $scope.register.name;
+        var scoutr_name = $scope.register.fname;
         var username = $scope.register.username;
         var password = $scope.register.password;
         var email = $scope.register.email;
         var team = $scope.register.team;
         
         var user = new Parse.User();
-        user.set("name", name);
+        user.set("name", scoutr_name);
         user.set("username", username);
         user.set("password", password);
         user.set("email", email);

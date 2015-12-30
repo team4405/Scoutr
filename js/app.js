@@ -54,6 +54,14 @@ var scoutr = angular.module('scoutr'
     
     Parse.initialize("E9CzXT1NS4T1luWwNu3jRKSHjmUIdPk0ca321pej", "TswapPftwupky3FF9fbPjB9WjBYyW5s07fQ3qFkz");
     
+    $scope.scoutrName = "";
+    $scope.scoutrTeam = "";
+    
+    Parse.User.current().fetch().then(function (user) {
+        $scope.scoutrName = user.get('name');
+        $scope.scoutrTeam = user.get('team');
+    });
+    
     $rootScope.changeView = function(view) {
         $location.path(view);
     }

@@ -2,6 +2,9 @@ searchVisible = 0;
 transparent = true;
 
 $(document).ready(function(){
+    
+    Parse.initialize("E9CzXT1NS4T1luWwNu3jRKSHjmUIdPk0ca321pej", "TswapPftwupky3FF9fbPjB9WjBYyW5s07fQ3qFkz");
+    
     /*  Activate the tooltips      */
     $('[rel="tooltip"]').tooltip();
       
@@ -193,7 +196,57 @@ function readURL(input) {
     }
 }
     
+function SignUp() {
+    
+    var Team = Parse.Object.extend("Teams");
+    var team = new Team();
+    
+    var user = new Parse.User();
+    var form = document.getElementById("signup-form")
 
+    var name = form.name.value;
+    var username = form.username.value;
+    var email = form.email.value;
+    var teamNumber = form.teamNumber.value;
+    var teamName = form.teamName.value;
+    var password = form.password.value;
+    var teamWeb = form.teamWeb.value;
+    
+    team.set("teamNumber", teamNumber);
+    team.set("teamName", teamName);
+    team.set("teamWeb", teamWeb);
+
+    user.set("name", name);
+    user.set("username", username);
+    user.set("email", email);
+    user.set("password", password);
+    user.set("teamNumber", teamNumber);
+    
+    user.signUp(null, {
+        success: function(user) {
+            // Hooray! Let them use the app now.
+            //alert("Thank you for signing up. We'll keep you updated!");
+            team.save(null, {
+                success: function(team) {
+                    // Execute any logic that should take place after the object is saved.
+                    alert('New object created with objectId: ' + team.id);
+                },
+                error: function(team, error) {
+                    // Execute any logic that should take place if the save fails.
+                    // error is a Parse.Error with an error code and message.
+                    alert('Failed to create new team, with error code: ' + error.message);
+                }
+            })
+        },
+        error: function(user, error) {
+            // Show the error message somewhere and let the user try again.
+            alert("Error: " + error.code + " " + error.message);
+        }
+
+    });
+
+    return false;
+}
 
 
 

@@ -78,6 +78,8 @@
             <ul class="dropdown-menu" role="menu" id="user-menu">
                 <li><a ng-hide="loggedIn()" data-toggle="modal" data-target="#login">Login</a></li>
                 <li><a ng-hide="loggedIn()" data-toggle="modal" data-target="#register">Register</a></li>
+                <li ng-show="loggedIn()"><a>Hi {{ scoutrName }}</a></li>
+                <li ng-show="loggedIn()" class="dropdown-header"> Team {{ scoutrTeam}}</li>
                 <li ng-show="loggedIn()" class="divider"></li>
                 <li><a ng-show="loggedIn()" ng-click='logout()'>Log Out</a></li> 
             </ul>

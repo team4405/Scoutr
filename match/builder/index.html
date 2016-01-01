@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+  <title>Form Builder</title>
+  <meta name="description" content="">
+  <link rel="stylesheet" href="vendor/css/vendor.css" />
+  <link rel="stylesheet" href="dist/formbuilder.css" />
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    /*background-color: #444;*/
+    font-family: sans-serif;
+  }
+
+  .fb-main {
+    background-color: #fff;
+    border-radius: 5px;
+    min-height: 600px;
+  }
+
+  input[type=text] {
+    height: 26px;
+    margin-bottom: 3px;
+  }
+
+  select {
+    margin-bottom: 5px;
+    font-size: 40px;
+  }
+  </style>
+</head>
+<body>
+  <div class='fb-main'></div>
+  <script type="text/javascript" src="https://www.parsecdn.com/js/parse-1.3.5.min.js"></script>
+  <script src="vendor/js/vendor.js"></script>
+  <script src="dist/formbuilder.js"></script>
+
+  <script>
+    $(function(){
+      
+      Parse.initialize("E9CzXT1NS4T1luWwNu3jRKSHjmUIdPk0ca321pej", "TswapPftwupky3FF9fbPjB9WjBYyW5s07fQ3qFkz");
+        
+        var teamNum = document.cookie.replace(/(?:(?:^|.*;\s*)team\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        var teamNumber = Number(teamNum);
+        
+        var Team = Parse.Object.extend("Teams");
+        
+        var query = new Parse.Query(Team);
+        query.equalTo("teamNumber", teamNumber);
+        query.find({
+            success: function(results) {
+
+                var cookie_name = "matchFields"
+                var data = results[0].get("matchForm");
+                //console.log(data);
+                document.cookie=cookie_name+"="+data+";";
+                
+            },
+            error: function(error) {
+                alert("Error: " + error.code + " " + error.message);
+            }
+        });
+      var form = document.cookie.replace(/(?:(?:^|.*;\s*)matchFields\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+      
+      var value = JSON.parse(form);
+      
+      var matchForm = $.map(value, function(el) { return el; })
+      
+      //console.log(matchForm);
+      
+      fb = new Formbuilder({
+        selector: '.fb-main',
+        bootstrapData: matchForm
+         
+         // form = {"fields":[{"label":"Untitled","field_type":"paragraph","required":true,"field_options":{"size":"small"},"cid":"c2"}]}
+         
+        // [
+        //   {
+        //     "label": "Please enter your clearance number",
+        //     "field_type": "text",
+        //     "required": true,
+        //     "field_options": {},
+        //     "cid": "c6"
+        //   },
+        //   {
+        //     "label": "Security personnel #82?",
+        //     "field_type": "radio",
+        //     "required": true,
+        //     "field_options": {
+        //         "options": [{
+        //             "label": "Yes",
+        //             "checked": false
+        //         }, {
+        //             "label": "No",
+        //             "checked": false
+        //         }],
+        //         "include_other_option": true
+        //     },
+        //     "cid": "c10"
+        //   },
+        //   {
+        //     "label": "Medical history",
+        //     "field_type": "file",
+        //     "required": true,
+        //     "field_options": {},
+        //     "cid": "c14"
+        //   }
+        // ]
+      });
+
+      fb.on('save', function(payload){
+        //console.log(payload);
+
+        var Team = Parse.Object.extend("Teams");
+        
+        var query = new Parse.Query(Team);
+        query.equalTo("teamNumber", teamNumber);
+        query.first({
+            success: function(object) {
+                object.set("matchForm", payload.fields);;
+                object.save();
+
+            },
+            error: function(error) {
+                alert("Error: " + error.code + " " + error.message);
+            }
+        });
+         
+      })
+    });
+  </script>
+
+</body>
+</html>

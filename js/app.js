@@ -13,12 +13,14 @@ var scoutr = angular.module('scoutr'
     //, 'Scoutr.dashboard'
     //, 'Scoutr.landing'
     //, 'Scoutr.admin'
+    , 'ngCookies'
     , 'angular-loading-bar'
     , 'parse-angular'
     , 'builder'
     , 'builder.components'
     , 'validator.rules'
     , 'ui.bootstrap'
+    //, 'ngFormBuilder'
     //, 'angularjsNotify'
   ]).config(function ($stateProvider, $urlRouterProvider) {
     // For any unmatched url, redirect to /state1
@@ -50,18 +52,22 @@ var scoutr = angular.module('scoutr'
     // }])
   
   .controller('MainCtrl', 
-    ['$scope', 'ParseService', '$location', '$rootScope', function($scope, ParseService, $location, $rootScope) {
+    ['$scope', 'ParseService', '$location', '$rootScope', '$cookies', function($scope, ParseService, $location, $rootScope, $cookies) {
     
     Parse.initialize("E9CzXT1NS4T1luWwNu3jRKSHjmUIdPk0ca321pej", "TswapPftwupky3FF9fbPjB9WjBYyW5s07fQ3qFkz");
     
     $scope.scoutrName = "";
     $scope.scoutrTeam = "";
     
+    if (Parse.User.current()){
     Parse.User.current().fetch().then(function (user) {
-        $scope.scoutrName = user.get('name');
-        $scope.scoutrTeam = user.get('team');
+       $scope.scoutrName = user.get('name');
+       $scope.scoutrTeam = user.get('team');
+       $cookies.put('team', $scope.scoutrTeam);
     });
-    
+    } else {
+        
+    };
     $rootScope.changeView = function(view) {
         $location.path(view);
     }
@@ -75,7 +81,7 @@ var scoutr = angular.module('scoutr'
         (function($) {
             $('#select').append($("<option></option>")
             .attr("value",object.get('teamNumber'))
-            .text(object.get('teamName')));
+            .text(object.get('teamName') + " - " + object.get('teamNumber')));
 
             })(jQuery);
 

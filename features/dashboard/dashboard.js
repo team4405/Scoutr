@@ -21,6 +21,15 @@ angular
   .controller('DashboardCtrl', function () {
     less.registerStylesheets();
     less.refresh(true);
-
+    // $scope.form = $builder.forms['default'];
+    //   $scope.input = [];
+    //   $scope.defaultValue = {};
+    //   return $scope.submit = function() {
+    //     return $validator.validate($scope, 'default').success(function() {
+    //       return console.log('success');
+    //     }).error(function() {
+    //       return console.log('error');
+    //     });
+    //   };
 
   });

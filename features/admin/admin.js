@@ -68,10 +68,10 @@ angular
       
        $scope.refresh = function(){location.reload();}
 
-       $scope.$on("$locationChangeStart", function(event) {
-       if (!confirm('You have unsaved changes, go back?'))
-            event.preventDefault();
-        });
+    //    $scope.$on("$locationChangeStart", function(event) {
+    //    if (!confirm('You have unsaved changes, go back?'))
+    //         event.preventDefault();
+    //     });
         
       $scope.form = $builder.forms['default'];
       $scope.input = [];
@@ -91,7 +91,7 @@ angular
         
       $scope.refresh = function(){location.reload();}
   
-      $scope.form = $builder.forms['default'];
+      $scope.form = $builder.forms['match'];
       $scope.input = [];
       $scope.defaultValue = {};
       return $scope.submit = function() {

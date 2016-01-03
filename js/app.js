@@ -136,6 +136,13 @@ var scoutr = angular.module('scoutr'
         $rootScope.currentUser = Parse.User.current();
         //$dismiss();
         $location.path("/");
+        
+        Parse.User.current().fetch().then(function (user) {
+            $scope.scoutrName = user.get('name');
+            $scope.scoutrTeam = user.get('team');
+            $cookies.put('team', $scope.scoutrTeam);
+        });
+        
         });
     }
 

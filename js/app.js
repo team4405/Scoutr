@@ -20,6 +20,7 @@ var scoutr = angular.module('scoutr'
     , 'builder.components'
     , 'validator.rules'
     , 'ui.bootstrap'
+    , 'ngDialog'
     //, 'ngFormBuilder'
     //, 'angularjsNotify'
   ]).config(function ($stateProvider, $urlRouterProvider) {
@@ -52,7 +53,7 @@ var scoutr = angular.module('scoutr'
     // }])
   
   .controller('MainCtrl', 
-    ['$scope', 'ParseService', '$location', '$rootScope', '$cookies', function($scope, ParseService, $location, $rootScope, $cookies) {
+    ['$scope', 'ParseService', '$location', '$rootScope', '$cookies', 'ngDialog', function($scope, ParseService, $location, $rootScope, $cookies, ngDialog) {
     
     Parse.initialize("E9CzXT1NS4T1luWwNu3jRKSHjmUIdPk0ca321pej", "TswapPftwupky3FF9fbPjB9WjBYyW5s07fQ3qFkz");
     
@@ -71,6 +72,18 @@ var scoutr = angular.module('scoutr'
     $rootScope.changeView = function(view) {
         $location.path(view);
     }
+    
+    $scope.open1 = function () {
+        ngDialog.open({ template: 'firstDialog',
+						controller: 'FirstDialogCtrl',
+						className: 'ngdialog-theme-default ngdialog-theme-custom' });
+    };
+    
+    $scope.open2 = function () {
+        ngDialog.open({ template: 'secondDialog',
+						controller: 'SecondDialogCtrl',
+						className: 'ngdialog-theme-default ngdialog-theme-custom' });
+    };
     
     var teams = Parse.Object.extend("Teams");
     var query = new Parse.Query(teams);
@@ -176,7 +189,25 @@ var scoutr = angular.module('scoutr'
 });
     };
 
-  }]).run(function ($rootScope, $state) {
+  }]).controller('FirstDialogCtrl', function ($scope, ngDialog) {
+				$scope.next = function () {
+					ngDialog.close('ngdialog1');
+					ngDialog.open({
+						template: 'secondDialog',
+                        controller: 'SecondDialogCtrl',
+						className: 'ngdialog-theme-flat ngdialog-theme-custom'
+					});
+				};
+    }).controller('SecondDialogCtrl', function ($scope, ngDialog) {
+				$scope.next = function () {
+					ngDialog.close('ngdialog2');
+					ngDialog.open({
+						template: 'firstDialog',
+                        controller: 'FirstDialogCtrl',
+						className: 'ngdialog-theme-flat ngdialog-theme-custom'
+					});
+				};
+	}).run(function ($rootScope, $state) {
 
 
 			$rootScope.$on('$stateChangeError',

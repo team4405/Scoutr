@@ -1,99 +1,500 @@
 <!DOCTYPE html>
-<html ng-app="starter">
-  <head>
-    <meta charset="utf-8">
-    <meta name="apple-mobile-web-app-title" content="Team 4405 Scoutr">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width,">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name=”viewport” content=”width=1024, minimal-ui”>
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <!--ANDROID-->
-    <meta name="theme-color" content="#db5945">
+<html ng-app="ionicApp">
+<head>
 
-    <link rel="icon" sizes="192x192" href="nice-highres.png">
-    <link rel="manifest" href="manifest.json">
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 
-    <!-- ICONS -->
+  <title>Ionic-AngularJS Kitchen Sink</title>
 
-      <!-- iPad retina icon -->
-      <link href="img/152x152.png"
-            sizes="152x152"
-            rel="apple-touch-icon-precomposed">
+  <link href="http://code.ionicframework.com/1.0.0-rc.4/css/ionic.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <script src="http://code.ionicframework.com/1.0.0-rc.4/js/ionic.bundle.min.js"></script>
+  <link href="css/app.css" rel="stylesheet">
+  <script src="js/app.js"></script> 
+  
+  <script type="text/javascript" src="https://www.parsecdn.com/js/parse-1.3.5.min.js"></script>
+  <script src="js/parse-angular.js"></script>
+  
+  <style>
+      .box {height:300px;padding: 10px}
+  </style>      
+</head>
 
-      <!-- iPad retina icon (iOS < 7) -->
-      <link href="img/144x144.png"
-            sizes="144x144"
-            rel="apple-touch-icon-precomposed">
+<body ng-controller="AppCtrl">
 
-      <!-- iPad non-retina icon -->
-      <link href="img/76x76.png"
-            sizes="76x76"
-            rel="apple-touch-icon-precomposed">
+  <ion-nav-bar class="nav-title-slide-ios7 bar-royal">
+    <ion-nav-back-button class="button-icon ion-arrow-left-c">
+    </ion-nav-back-button>
+  </ion-nav-bar>
 
-      <!-- iPad non-retina icon (iOS < 7) -->
-      <link href="img/72x72.png"
-            sizes="72x72"
-            rel="apple-touch-icon-precomposed">
+  <ion-nav-view animation="slide-left-right"></ion-nav-view>
+    
+  <script id="menu.html" type="text/ng-template">
+    <ion-side-menus>
 
-      <!-- iPhone 6 Plus icon -->
-      <link href="img/180x180.png"
-            sizes="120x120"
-            rel="apple-touch-icon-precomposed">
+      <ion-side-menu side="left">
+        <ion-header-bar class="bar-royal">
+          <h1 class="title">Menu</h1>
+        </ion-header-bar>
+        <ion-content>
+          <ul class="list">
+            <a ui-sref="menu.tabs.buttons" class="item" menu-close>Home</a>
+            <a ui-sref="menu.keyboard" class="item" menu-close>Keyboard Input Types</a>
+            <a ui-sref="menu.slidebox" class="item" menu-close>Slide Box</a>
+            <a ui-sref="menu.about" class="item" menu-close>About</a>
+          </ul>
+        </ion-content>
+      </ion-side-menu>
 
-      <!-- iPhone retina icon (iOS < 7) -->
-      <link href="img/114x114.png"
-            sizes="114x114"
-            rel="apple-touch-icon-precomposed">
+      <ion-side-menu-content> 
+        <ion-nav-bar class="bar-royal">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+            <ion-nav-buttons side="left">
+              <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+              </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>              
+        <ion-nav-view name="menuContent"></ion-nav-view>
+      </ion-side-menu-content>
 
-      <!-- iPhone non-retina icon (iOS < 7) -->
-      <link href="img/57x57.png"
-            sizes="57x57"
-            rel="apple-touch-icon-precomposed">
-
-
-    <title></title>
-
-    <link href="https://code.ionicframework.com/0.9.27/css/ionic.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-    <!--<link href="css/slider.css" rel="stylesheet">-->
-
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-
-    -IF NEEDED, PUT THIS UNDER BODY BEFORE SIDEMENUS-
-
-
+    </ion-side-menus>
+  </script>    
+    
+  <script id="tabs.html" type="text/ng-template">
     <ion-nav-bar class="bar-royal">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
+        <ion-nav-back-button class="button-icon ion-arrow-left-c">
+        </ion-nav-back-button>
+
+        <ion-nav-buttons side="left">
+          <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+
+        <ion-nav-buttons side="right">
+          <!--<button class="button button-icon button-clear ion-compose" ng-click="modal.show()"></button>-->
+          <a class="padding button button-clear" ng-click="modal.show()">Match</a>
+        </ion-nav-buttons>
     </ion-nav-bar>
+        
+    <ion-tabs class="tabs-icon-top tabs-royal">
 
-    -->
-    <!-- ionic/angularjs js -->
-    <script src="https://code.ionicframework.com/0.9.27/js/ionic.bundle.min.js"></script>
+      <ion-tab title="Dashboard" icon="ion-clipboard" ui-sref="menu.tabs.buttons">
+        <ion-nav-view name="buttons-tab"></ion-nav-view>
+      </ion-tab>
 
-    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/0.2.0/angularfire.min.js"></script>
+      <ion-tab title="Teams" icon="ion-person-stalker" ui-sref="menu.tabs.list">
+        <ion-nav-view name="list-tab"></ion-nav-view>
+      </ion-tab>
 
-    <script src="js/jquery.min.js"></script>
-    <!--<script src="js/slider.js"></script>-->
+      <ion-tab title="Match Schedule" icon="ion-calendar" ui-sref="menu.tabs.form">
+        <ion-nav-view name="form-tab"></ion-nav-view>
+      </ion-tab>
+      
+      <ion-tab title="Account Settings" icon="ion-gear-b" ui-sref="menu.tabs.account">
+        <ion-nav-view></ion-nav-view>
+      </ion-tab>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-touch.min.js"></script>
-    <script src="js/angular-slider.min.js"></script>
+    </ion-tabs>
+  </script>
 
+  <script id="buttons.html" type="text/ng-template">
+    <ion-view view-title="Dashboard">
+      <ion-content class="padding">
+        <p>Example of Ionic buttons, grouped buttons, popup and actionsheet.Hi {{ scoutrName }}</p>
+        <div class="card">
+                <div class="item item-divider">
+                  Next Match is at XX:XX{{nextMatchTime}}
+                </div>
 
-    <!--<script src="lib/compare/compare.js"></script>-->
+                <div class="alliance">
+                  <div class="team">
+                  <div class="item item-avatar panel-info" ui-sref="main.teams-detail">
+                    <h2>Team {{team.teamNumber}}</h2>
+                    <p>Team Name (the picture would be of the robot)</p>
+                  </div>
 
-    <!-- your app's js -->
-    <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/services.js"></script>
-  </head>
-  <body>
-    <content overflow-scroll="true">
-    <!-- ALL VIEW STATES LOADED IN HERE -->
-    <ion-nav-view></ion-nav-view>
-    </content>
-  </body>
+                  <div class="item item-body">
+                    <ion-list>
+
+                      <div class="item item-divider">
+                        Autonomous
+                      </div>
+                      <ion-item class="item">
+                        <i class="icon"></i>
+                        Average Score
+                        <span class="badge badge-balanced">
+                          50
+                        </span>
+                      </ion-item>
+                      <ion-item class="item">
+                        Some other data point
+                        <span class="badge badge-balanced">Value</span>
+                      </ion-item>
+
+                      <div class="item item-divider">
+                        Teleop
+                      </div>
+                      <ion-item class="item">
+                        <i class="icon"></i>
+                        Average Score
+                        <span class="badge badge-balanced">
+                          20
+                       USB </span>
+                      </ion-item>
+                      <ion-item class="item">
+                        Some other data point
+                        <span class="badge badge-balanced">Value</span>
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                  </div><hr>
+                  <div class="team">
+                  <div class="item item-avatar" ui-sref="main.teams-detail">
+                    <h2>Team {{team.teamNumber}}</h2>
+                    <p>Team Name (the picture would be of the robot)</p>
+                  </div>
+
+                  <div class="item item-body">
+                    <ion-list>
+
+                      <div class="item item-divider">
+                        Autonomous
+                      </div>
+                      <ion-item class="item">
+                        <i class="icon"></i>
+                        Average Score
+                        <span class="badge badge-balanced">
+                          50
+                        </span>
+                      </ion-item>
+                      <ion-item class="item">
+                        Some other data point
+                        <span class="badge badge-balanced">Value</span>
+                      </ion-item>
+
+                      <div class="item item-divider">
+                        Teleop
+                      </div>
+                      <ion-item class="item">
+                        <i class="icon"></i>
+                        Average Score
+                        <span class="badge badge-balanced">
+                          20
+                       USB </span>
+                      </ion-item>
+                      <ion-item class="item">
+                        Some other data point
+                        <span class="badge badge-balanced">Value</span>
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                  </div><hr>
+                  <div class="team">
+                  <div class="item item-avatar" ui-sref="main.teams-detail">
+                    <h2>Team {{team.teamNumber}}</h2>
+                    <p>Team Name (the picture would be of the robot)</p>
+                  </div>
+
+                  <div class="item item-body">
+                    <ion-list>
+
+                      <div class="item item-divider">
+                        Autonomous
+                      </div>
+                      <ion-item class="item">
+                        <i class="icon"></i>
+                        Average Score
+                        <span class="badge badge-balanced">
+                          50
+                        </span>
+                      </ion-item>
+                      <ion-item class="item">
+                        Some other data point
+                        <span class="badge badge-balanced">Value</span>
+                      </ion-item>
+
+                      <div class="item item-divider">
+                        Teleop
+                      </div>
+                      <ion-item class="item">
+                        <i class="icon"></i>
+                        Average Score
+                        <span class="badge badge-balanced">
+                          20
+                       USB </span>
+                      </ion-item>
+                      <ion-item class="item">
+                        Some other data point
+                        <span class="badge badge-balanced">Value</span>
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                </div>
+                </div>
+              </div>        
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <script id="item.html" type="text/ng-template">
+    <ion-view title="Item">
+      <ion-content class="padding">
+        <p>Details of Item</p>
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <script id="list.html" type="text/ng-template">
+    <ion-view view-title="List Nav">
+      <ion-content>
+        <ion-list show-delete="data.showDelete" on-delete="onItemDelete(item)" option-buttons="itemButtons">
+
+        <div class="list">
+          <div class="item item-divider">
+            Static list
+          </div>  
+          
+          <a class="item item-icon-left" href="#/menu/tab/item">
+            <i class="icon ion-email"></i>
+            Check mail
+          </a>
+
+          <a class="item item-icon-left item-icon-right" href="#/menu/tab/item">
+            <i class="icon ion-chatbubble-working"></i>
+            Call Ma
+            <i class="icon ion-ios-telephone-outline"></i>
+          </a>
+
+          <a class="item item-icon-left" href="#/menu/tab/item">
+            <i class="icon ion-mic-a"></i>
+            Record album
+            <span class="item-note">
+              Grammy
+            </span>
+          </a>
+
+          <a class="item item-icon-left" href="#/menu/tab/item">
+            <i class="icon ion-person-stalker"></i>
+            Friends
+            <span class="badge badge-assertive">0</span>
+          </a>
+        
+          <div class="item item-divider">
+            Angularjs list
+          </div>
+               
+          <ion-item ng-repeat="item in items" class="item item-icon-right" href="#/menu/tab/item">
+            Item {{ item.id }}
+            <i class="icon ion-chevron-right icon-accessory"></i>
+          </ion-item>  
+
+          <div class="item item-divider">
+            Avatar list item
+          </div>  
+
+          <a class="item item-avatar" href="#/menu/tab/item">
+            <img src="http://ionicframework.com/img/docs/blue-album.jpg">
+            <h2>Title</h2>
+            <p>Some detailed text</p>
+          </a>
+
+          <div class="item item-divider">
+            Thumbnail list item
+          </div>  
+          <a class="item item-thumbnail-left" href="#/menu/tab/item">
+            <img src="http://ionicframework.com/img/docs/blue-album.jpg">
+            <h2>Title</h2>
+            <p>Some detailed text</p>
+          </a>
+
+        </div>         
+
+        </ion-list>
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <script id="form.html" type="text/ng-template">
+    <ion-view view-title="Form Elements">
+      <ion-content class="padding">
+        
+        <div class="list">
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper" id="search-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search">
+          </label>
+        </div>
+        </div>
+        
+        <div class="list">
+          <div class="item item-divider">
+            Other form elements
+          </div>
+        
+          <label class="item item-radio">
+            <input type="radio" name="group">
+            <div class="item-content">
+              Radio Item #1
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group">
+            <div class="item-content">
+              Radio Item #2
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          
+          <label class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox">
+             </label>
+             Checkbox
+          </label> 
+          
+          <li class="item item-toggle">
+             Toggle
+             <label class="toggle toggle-assertive">
+               <input type="checkbox">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+          </li>
+        
+          <div class="item range range-royal">
+            <i class="icon ion-ios7-sunny-outline"></i>
+            <input type="range" name="volume" min="0" max="100" value="33">
+            <i class="icon ion-ios7-sunny"></i>
+          </div>
+        
+          <div class="item item-input item-select">
+            <div class="input-label">
+              Select
+            </div>
+            <select>
+              <option>Option #1</option>
+              <option selected>Option #2</option>
+              <option>Option #3</option>
+            </select>
+          </div>
+          
+        </div>
+      </ion-content>
+    </ion-view>
+  </script>  
+
+  <script id="keyboard.html" type="text/ng-template">
+    <ion-view view-title="Keyboard">
+      <ion-content class="padding">
+        <div class="list">        
+          <label class="item item-divider">
+            Input types for popup keyboard
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Text</span>
+            <input type="text" ng-model="user.username">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Password</span>
+            <input type="password" ng-model="user.password">
+          </label>          
+          <label class="item item-input">
+            <span class="input-label">Email</span>
+            <input type="email">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Tel</span>
+            <input type="tel">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Number</span>
+            <input type="number">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Date</span>
+            <input type="date">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Month</span>
+            <input type="month">
+          </label> 
+        </div>
+      </ion-content>
+    </ion-view>
+  </script>     
+
+  <script id="slidebox.html" type="text/ng-template">
+    <ion-view view-title="Slidebox">
+      <ion-content>
+        <ion-slide-box>
+          <ion-slide>
+            <div class="box">
+                <h2>Box #1</h2>
+                <p>Content goes here</p>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="box">
+                <h2>Box #2</h2>
+                <p>Content goes here</p>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="box">
+                <h2>Box #3</h2>
+                <p>Content goes here</p>
+            </div>
+          </ion-slide>
+        </ion-slide-box>
+       </ion-content>    
+    </ion-view>
+  </script> 
+    
+  <script id="about.html" type="text/ng-template">
+    <ion-view view-title="About">
+
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-email"></button>
+      </ion-nav-buttons>
+      
+      <ion-content class="padding">
+        <div class="card">
+          <div class="item">
+            <h3>Ionic Framework Kitchen Sink</h3>
+            <p>by <a href="http://twitter.com/krisrak" target="_blank">@krisrak</a></p>
+          </div>    
+        </div>
+      </ion-content>
+    </ion-view>
+  </script>    
+
+  <script id="modal.html" type="text/ng-template">
+    <div class="modal">
+      <ion-header-bar class="bar bar-header bar-royal">
+        <h1 class="title">Modal</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+      </ion-header-bar>
+      
+      <ion-content class="padding">
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">To</span>
+            <input type="text">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Message</span>
+            <textarea rows="4"></textarea>
+          </label>
+        </div>
+        <button class="button icon icon-right ion-arrow-right-c button-balanced button-block">Send</button>
+      </ion-content>
+    </div>
+  </script>  
+
+      
+</body>
 </html>

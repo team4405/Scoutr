@@ -7,14 +7,7 @@ angular.module('ionicApp', ['ionic', 'parse-angular'])
       url: "/menu",
       abstract: true,
       templateUrl: "menu.html",
-      controller: 'MenuCtrl'//,
-    //   authRequired: true,
-    //     resolve: {
-    //         user: function (UserService) {
-    //         var value = UserService.init();
-    //         return value;
-    //         }
-    //     }
+      controller: 'MenuCtrl'
     })
     .state('menu.tabs', {
       url: "/tab",
@@ -22,7 +15,14 @@ angular.module('ionicApp', ['ionic', 'parse-angular'])
         'menuContent' :{
           templateUrl: "tabs.html"
         }
-      }
+      }//,
+    //   authRequired: true,
+    //     resolve: {
+    //         user: function (UserService) {
+    //         var value = UserService.init();
+    //         return value;
+    //         }
+    //     }
     })
     .state('menu.tabs.buttons', {
       url: "/buttons",
@@ -255,6 +255,11 @@ angular.module('ionicApp', ['ionic', 'parse-angular'])
 .controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $ionicModal) {              
   $ionicModal.fromTemplateUrl('modal.html', function (modal) {
     $scope.modal = modal;
+  }, {
+    animation: 'slide-in-up'
+  });
+  $ionicModal.fromTemplateUrl('modal1.html', function (modal1) {
+    $scope.modal1 = modal1;
   }, {
     animation: 'slide-in-up'
   });

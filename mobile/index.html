@@ -4,7 +4,12 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#886aea">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#886aea">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="#886aea">
   <title>Ionic-AngularJS Kitchen Sink</title>
 
   <link href="http://code.ionicframework.com/1.0.0-rc.4/css/ionic.min.css" rel="stylesheet">
@@ -73,6 +78,7 @@
 
         <ion-nav-buttons side="right">
           <!--<button class="button button-icon button-clear ion-compose" ng-click="modal.show()"></button>-->
+          <a class="padding button button-clear" ng-click="modal1.show()">Pit &nbsp;</a>
           <a class="padding button button-clear" ng-click="modal.show()">Match</a>
         </ion-nav-buttons>
     </ion-nav-bar>
@@ -476,6 +482,28 @@
     <div class="modal">
       <ion-header-bar class="bar bar-header bar-royal">
         <h1 class="title">Modal</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+      </ion-header-bar>
+      
+      <ion-content class="padding">
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">To</span>
+            <input type="text">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Message</span>
+            <textarea rows="4"></textarea>
+          </label>
+        </div>
+        <button class="button icon icon-right ion-arrow-right-c button-balanced button-block">Send</button>
+      </ion-content>
+    </div>
+  </script>
+  <script id="modal1.html" type="text/ng-template">
+    <div class="modal">
+      <ion-header-bar class="bar bar-header bar-royal">
+        <h1 class="title">Pit Scoutr</h1>
         <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
       </ion-header-bar>
       
